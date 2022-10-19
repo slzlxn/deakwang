@@ -1,0 +1,199 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    color: #333;
+    line-height: 1;
+}
+
+/* 모바일 reset */
+.mobile {
+    display: none;
+}
+
+header {
+    height: 100px;
+}
+
+header .inner {
+    max-width: calc(100% - 10%);
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* align-items: center 세로 가운데 정렬 display: flex일때만 사용가능*/
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+header .pc_gnb {
+    height: 100%;
+}
+
+header .pc_gnb>ul {
+    display: flex;
+    height: 100%;
+    font-size: 20px;
+}
+
+header .pc_gnb>ul>li {
+    text-align: center;
+    padding: 0 30px;
+    position: relative;
+}
+
+header .pc_gnb>ul>li>a {
+    /* line-height: 100px; 수정이 필요하게 됨*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 넓이 중앙 정렬 */
+    height: 100%;
+    font-weight: bold;
+    color: #7a6955;
+}
+
+/* 2차 메뉴 */
+
+header .pc_gnb>ul>li>ul {
+    background-color: #7a6955;
+    color: #fff;
+    padding: 20px;
+    font-size: 16px;
+    display: none;
+
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+header .pc_gnb>ul>li>ul>li {
+    padding: 10px 0;
+}
+
+header .pc_gnb>ul>li>ul>li>a {}
+
+/* 오른쪽메뉴 */
+header .user_gnb {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+}
+
+header .user_gnb li {
+    margin-left: 15px;
+}
+
+/* header .user_gnb li중에서 마지막 li한테 스타일 적용 */
+header .user_gnb li:last-child {
+    border: 1px solid #7a6955;
+    color: #7a6955;
+    padding: 10px 20px;
+}
+
+.main_visual {
+    height: 50vh;
+    background-color: #eee;
+}
+
+/* vh 높이에 따라 영역 차지 50vh는 화면의 반 차지
+   vw 넓이에 따라 영역 차지 글자크기에도 적용가능 1vw = 1% = 10px 거의*/
+
+/* 해상도 1440px 이하 */
+@media screen and (max-width:1440px) {
+    header .inner {
+        max-width: 98%;
+    }
+
+    header h1 {
+        font-size: 1.8vw;
+    }
+
+    header .pc_gnb>ul {
+        font-size: 1.4vw;
+    }
+
+    header .pc_gnb>ul>li {
+        padding: 0 15px;
+    }
+}
+
+/* 해상도 1024px 이하 */
+@media screen and (max-width:1024px) {
+    .pc {
+        display: none !important;
+    }
+
+    /* !important 제일 상위 올림*/
+    .mobile {
+        display: block;
+    }
+
+    header .mobile_gnb {
+        background-color: #eee;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        /* 브라우저가 중심 */
+        top: 0;
+        left: 100%;
+        /* 지금은 100% 나중에 스크립트로 0으로 바뀌게  */
+        padding: 50px;
+        transition: 0.7s;
+    }
+
+    header .mobile_gnb.on {
+        left: 0;
+        transition: 0.7s;
+    }
+
+    header .mobile_gnb .user_gnb {
+        justify-content: flex-end;
+    }
+
+    /* 모바일 메뉴 */
+    .mobile_gnb .gnb {}
+
+    .mobile_gnb .gnb>li {}
+
+    .mobile_gnb .gnb>li>a {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px 0;
+        display: block;
+    }
+
+    /* 2차메뉴 */
+
+    .mobile_gnb .gnb>li>ul {
+        display: none;
+    }
+
+    .mobile_gnb .gnb>li>ul>li {}
+
+    .mobile_gnb .gnb>li>ul>li>a {
+        padding: 12px 0;
+        display: block;
+    }
+}
+
+/* 1024px 이하 */
