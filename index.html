@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대광로제비앙</title>
-    <link href="css/main.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="css/main.css">
     <script src="lib/jquery-3.6.1.min.js"></script>
-    <script>
+    <script> //$(function(){}) -> 제이쿼리를 시작 하겠다
         $(function () {
             //싱글드롭다운 : 11_메뉴드롭다운.html 참고
             $('.pc_gnb .depth01').mouseenter(function () {
@@ -19,49 +18,59 @@
                 $(this).children('.depth02').stop().slideUp();
             });
 
-            //메뉴보기 클릭 시 .mobile_gnb한테
-            //클래스명 추가 addClass()
+            //메뉴보기 클릭 시 .mobile_gnb한테 클레스명 추가(addClass())
             $('.open').click(function () {
                 $('.mobile_gnb').addClass('on');
             });
-
-            //메뉴닫기 클릭 시 .mobile_gnb한테
-            //클래스명 삭제 removeClass()
+            //메뉴닫기 클릭 시 .mobile_gnb한테 클레스명 삭제(removeClass())
             $('.close').click(function () {
                 $('.mobile_gnb').removeClass('on');
             });
 
-            /* css파일에서 .mobile_gnb한테 
-            클래스명 붙으면 left: 0; 
-            부드럽게 움직이도록 설정 transition:  */
+            /* css파일에서 .mobile_gnb한테 클레스명 붙으면 left:0
+                부드럽게 움직이도록 설정 transition: 
+                -> header .mobile_gnb.on 하나 만들고 트렌지션
+                사라질때도 부드럽게 하려면 header .mobile_gnb에도 트렌지션 */
 
+            //모바일 메뉴(아코디언메뉴) if문
+            //1차 메뉴 클릭했을 때 2차 메뉴 슬라이드 다운
+            //다른 1차메뉴 클릭 시 열려있는 2차 메뉴 슬라이드 업이 되고 
 
-            //모바일메뉴(아코디언메뉴) 참고파일 12번
-            //1차메뉴를 클릭했을 때 2차메뉴 슬라이드다운
-
-            //다른 1차메뉴 클릭 시 열려있는 2차메뉴는 슬라이드 업
             $('.mobile_gnb .depth01>a').click(function () {
                 if ($(this).next().css('display') == 'none') {
+                    $('.depth02').slideUp();
+                    $(this).next('.depth02').slideDown();
 
-                    $('.mobile_gnb .depth02').slideUp();
-                    $(this).next().slideDown();
-
-                    /* 클릭한 a태그한테 글자색 변경 */
+                    /* 클릭한 a태그한테 글자 색 변경 */
+                    //한가지 스타일일때 $().css('속성','속성값');
                     $('.mobile_gnb .depth01>a').css('color', '#333');
                     $(this).css('color', '#7a6955');
-
                 } else {
+                    //조건이 맞지 않을 때 
                     $(this).next().slideUp();
-
+                    //한가지 이상 스타일일때 $().css({'속성':'속성값'});
                     $(this).css({ 'color': '#333' });
                 }
             });
 
+            //about 탭메뉴
+            //.tab_menu li 를 클릭했을 때 실행
+            //.tab_menu li한테 클레스명 제어 on 추가/삭제
+            $('.tab_menu li').click(function () {
+                $('.tab_menu li').removeClass('on');
+                $(this).addClass('on');
 
+                //tab_cont한테 클레스명 on 추가/삭제
+                $('.tab_cont').removeClass('on');
+                $('.tab_cont').eq($(this).index()).addClass('on');
+                //.bg>div한테 hide(), show()
+                $('.bg div').hide();
+                $('.bg div').eq($(this).index()).show();
+            });
 
-        })//jquery end
+            //깃허브에 업로드 후 수정하고 5분 지나서 확인했는데도 변화가 없을때 화면에서 ctrl + F5 눌리면 쿠키 삭제 후 새로고침 되서 바껴진다.
+        });//jquery end
     </script>
-
 </head>
 
 <body>
@@ -80,8 +89,7 @@
                             <li><a href="#">VISION</a></li>
                             <li><a href="#">오시는길</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">사업영역</a>
                         <ul class="depth02">
@@ -91,8 +99,7 @@
                             <li><a href="#">호텔사업</a></li>
                             <li><a href="#">금융사업</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">분양단지</a>
                         <ul class="depth02">
@@ -100,8 +107,7 @@
                             <li><a href="#">분양예정단지</a></li>
                             <li><a href="#">주택청약안내</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">공사 입주단지</a>
                         <ul class="depth02">
@@ -111,8 +117,7 @@
                             <li><a href="#">입주예약</a></li>
                             <li><a href="#">입주예약조회</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">BRAND</a>
                         <ul class="depth02">
@@ -121,8 +126,7 @@
                             <li><a href="#">수상실적</a></li>
                             <li><a href="#">광고센터</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">고객센터</a>
                         <ul class="depth02">
@@ -130,26 +134,23 @@
                             <li><a href="#">공지사항</a></li>
                             <li><a href="#">자주하는질문</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
+                    </li><!-- .depth01 end -->
                 </ul>
-            </nav><!-- .pc_gnb end -->
-
+            </nav> <!-- .pc_gnb end -->
             <ul class="user_gnb pc">
-                <li><a href="#">검색</a></li>
-                <li><a href="#">회원가입</a></li>
-                <li><a href="#">로그인</a></li>
-            </ul><!-- .user_gnb end -->
-
-            <!-- 모바일메뉴 영역 -->
+                <li><a href='#'>검색</a></li>
+                <li><a href='#'>회원가입</a></li>
+                <li><a href='#'>로그인</a></li>
+            </ul>
+            <!-- 모바일 메뉴 영역 -->
             <i class="mobile open"><span>메뉴보기</span></i>
             <nav class="mobile mobile_gnb">
                 <ul class="user_gnb">
-                    <li><a href="#">검색</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li class="close"><a href="#">메뉴닫기</a></li>
-                    <li><a href="#">로그인</a></li>
+                    <li><a href='#'>검색</a></li>
+                    <li><a href='#'>회원가입</a></li>
+                    <li class="close"><a href='#'>메뉴닫기</a></li>
+                    <li><a href='#'>로그인</a></li>
                 </ul><!-- .user_gnb end -->
-
                 <ul class="gnb">
                     <li class="depth01">
                         <a href="#">회사소개</a>
@@ -159,8 +160,7 @@
                             <li><a href="#">VISION</a></li>
                             <li><a href="#">오시는길</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">사업영역</a>
                         <ul class="depth02">
@@ -170,8 +170,7 @@
                             <li><a href="#">호텔사업</a></li>
                             <li><a href="#">금융사업</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">분양단지</a>
                         <ul class="depth02">
@@ -179,8 +178,7 @@
                             <li><a href="#">분양예정단지</a></li>
                             <li><a href="#">주택청약안내</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">공사 입주단지</a>
                         <ul class="depth02">
@@ -190,8 +188,7 @@
                             <li><a href="#">입주예약</a></li>
                             <li><a href="#">입주예약조회</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">BRAND</a>
                         <ul class="depth02">
@@ -200,8 +197,7 @@
                             <li><a href="#">수상실적</a></li>
                             <li><a href="#">광고센터</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
-
+                    </li><!-- .depth01 end -->
                     <li class="depth01">
                         <a href="#">고객센터</a>
                         <ul class="depth02">
@@ -209,16 +205,55 @@
                             <li><a href="#">공지사항</a></li>
                             <li><a href="#">자주하는질문</a></li>
                         </ul><!-- .depth02 end -->
-                    </li><!-- .depth01 -->
+                    </li><!-- .depth01 end -->
                 </ul>
-            </nav><!-- .pc_gnb end -->
-
+            </nav> <!-- .mobile_gnb end -->
         </div><!-- .inner end -->
     </header>
-
     <section class="main_visual">
-        메인비주얼 제작하기
-    </section><!-- .main_visual end -->
+        <img class="pc" src="img/pc-vis1.jpg" alt="" />
+        <img class="mobile" src="img/m-vis1.jpg" alt="" />
+    </section><!-- .main_visual end-->
+
+    <section class="quick_menu">
+        <ul class="inner">
+            <li><a href="#">QUICK MENU</a></li>
+            <li><a href="#">입주예약</a></li>
+            <li><a href="#">입주가이드</a></li>
+            <li><a href="#">고객센터</a></li>
+        </ul><!-- .inner end -->
+    </section><!-- .quick menu end -->
+
+    <section class="about">
+        <div class="inner">
+            <h3>ABOUT US</h3>
+            <ul class="tab_menu">
+                <li class="on">대광건영</li>
+                <li>대광로제비앙</li>
+            </ul><!-- tab_menu end -->
+
+            <div class="tabs">
+                <div class="tab_cont on">
+                    <p>대광은 고객 중심 주택문화를
+                        <br>실현하기 위해 노력합니다.
+                    </p>
+                    <a href="#">기업 소개 바로가기</a>
+                </div><!-- tab_cont end -->
+                <div class="tab_cont">
+                    <p>고품격 주거 문화를 리드하는
+                        <br>대광로제비앙 입니다.
+                    </p>
+                    <a href="#">브랜드 소개 바로가기</a>
+                </div><!-- tab_cont end -->
+            </div><!-- tabs end -->
+        </div><!-- inner end -->
+
+        <div class="bg">
+            <!-- 접근성을 위한 홈페이지 제작에는 빈 테그가 있으면 안된다. img 테그에서도 alt 필수 -->
+            <div class="bg1"><span>대광건영 이미지</span></div>
+            <div class="bg2"><span>대광로제비앙 이미지</span></div>
+        </div>
+    </section><!-- about end -->
 </body>
 
 </html>

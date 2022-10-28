@@ -11,8 +11,8 @@ li {
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 body {
@@ -20,12 +20,17 @@ body {
     line-height: 1;
 }
 
+.inner {
+    max-width: 1440px;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+}
+
 /* 모바일 reset */
 .mobile {
     display: none;
 }
 
-/* header */
 header {
     height: 100px;
 }
@@ -37,6 +42,7 @@ header .inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* align-items: center 세로 가운데 정렬 display: flex일때만 사용가능*/
 }
 
 header h1 {
@@ -60,31 +66,31 @@ header .pc_gnb>ul>li {
 }
 
 header .pc_gnb>ul>li>a {
-    /* line-height: 100px; */
+    /* line-height: 100px; 수정이 필요하게 됨*/
     display: flex;
     align-items: center;
     justify-content: center;
+    /* 넓이 중앙 정렬 */
     height: 100%;
     font-weight: bold;
     color: #7a6955;
 }
 
-/* 2차메뉴 */
+/* 2차 메뉴 */
+
 header .pc_gnb>ul>li>ul {
     background-color: #7a6955;
     color: #fff;
     padding: 20px;
     font-size: 16px;
-
     display: none;
+
     position: absolute;
     top: 100px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-
 }
-
 
 header .pc_gnb>ul>li>ul>li {
     padding: 10px 0;
@@ -95,33 +101,154 @@ header .pc_gnb>ul>li>ul>li>a {}
 /* 오른쪽메뉴 */
 header .user_gnb {
     display: flex;
-    align-items: center;
     font-size: 14px;
-
+    align-items: center;
 }
 
 header .user_gnb li {
     margin-left: 15px;
 }
 
+/* header .user_gnb li중에서 마지막 li한테 스타일 적용 */
 header .user_gnb li:last-child {
     border: 1px solid #7a6955;
     color: #7a6955;
     padding: 10px 20px;
 }
 
-/*header .user_gnb li중에서
-마지막 li한테 스타일 적용
-
-테두리 : 1px solid #7a6955;
-글자색상 : #7a6955;
-내부여백 : 위아래10px 좌우20px
- */
-
 .main_visual {
-    height: 50vh;
+    height: calc(100vh - 100px);
     background-color: #eee;
 }
+
+.main_visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*  quick_menu */
+.quick_menu {
+    height: 130px;
+}
+
+.quick_menu ul {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick_menu ul li {
+    height: 100%;
+    width: calc(100% / 4);
+    border-right: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.quick_menu ul li:first-child {
+    border-left: 1px solid #ccc;
+    color: #7a6955;
+    font-weight: bold;
+}
+
+
+/* .about */
+.about {
+    height: 960px;
+    background: url('../img/dk-bg.jpg') center center/ cover no-repeat;
+    color: #fff;
+    padding: 200px 0;
+    position: relative;
+}
+
+.about .bg>div span {
+    position: absolute;
+    left: -9999999px;
+}
+
+.about .bg>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.about .bg .bg1 {
+    background: url(../img/dk-bg.jpg) center center / cover no-repeat;
+}
+
+.about .bg .bg2 {
+    background: url(../img/loge-bg.jpg) center center / cover no-repeat;
+}
+
+.about .inner {
+    z-index: 9;
+    position: relative;
+}
+
+.about h3 {
+    font-size: 50px;
+    display: inline-block;
+}
+
+.about .tab_menu {
+    display: inline-block;
+    /* display : inline-block 일때 수직정렬은 vertical-align: middle; 이용 */
+    vertical-align: middle;
+    font-size: 22px;
+    margin-left: 100px;
+    height: 50px;
+}
+
+
+.about .tab_menu li {
+    display: inline-block;
+    margin-right: 50px;
+    color: rgba(255, 255, 255, 0.518);
+    cursor: pointer;
+}
+
+.about .tab_menu li.on {
+    color: #fff;
+}
+
+.about .tab_cont {
+    margin-top: 150px;
+    display: none;
+}
+
+.about .tab_cont.on {
+    display: block;
+}
+
+.about .tab_cont p {
+    font-size: 50px;
+    line-height: 1.4;
+}
+
+.about .tab_cont a {
+    display: block;
+    width: 220px;
+    height: 60px;
+    border: 1px solid #fff;
+    margin-top: 50px;
+    text-align: center;
+    line-height: 60px;
+    transition: .5s;
+}
+
+.about .tab_cont a:hover {
+    background-color: #7a6955;
+    border: 1px solid #7a6955;
+}
+
+/* vh 높이에 따라 영역 차지 50vh는 화면의 반 차지
+   vw 넓이에 따라 영역 차지 글자크기에도 적용가능 1vw = 1% = 10px 거의*/
 
 /* 해상도 1440px 이하 */
 @media screen and (max-width:1440px) {
@@ -142,16 +269,13 @@ header .user_gnb li:last-child {
     }
 }
 
-/* 1440px 이하 */
-
-
-
 /* 해상도 1024px 이하 */
 @media screen and (max-width:1024px) {
     .pc {
         display: none !important;
     }
 
+    /* !important 제일 상위 올림*/
     .mobile {
         display: block;
     }
@@ -161,9 +285,18 @@ header .user_gnb li:last-child {
         width: 100%;
         height: 100%;
         position: fixed;
+        /* 브라우저가 중심 */
         top: 0;
         left: 100%;
+        /* 지금은 100% 나중에 스크립트로 0으로 바뀌게  */
         padding: 50px;
+        transition: 0.7s;
+
+        overflow-y: scroll;
+    }
+
+    header .mobile_gnb::-webkit-scrollbar {
+        display: none;
     }
 
     header .mobile_gnb.on {
@@ -171,11 +304,11 @@ header .user_gnb li:last-child {
         transition: 0.7s;
     }
 
-    .mobile_gnb .user_gnb {
+    header .mobile_gnb .user_gnb {
         justify-content: flex-end;
     }
 
-    /* 메뉴 */
+    /* 모바일 메뉴 */
     .mobile_gnb .gnb {}
 
     .mobile_gnb .gnb>li {}
@@ -188,6 +321,7 @@ header .user_gnb li:last-child {
     }
 
     /* 2차메뉴 */
+
     .mobile_gnb .gnb>li>ul {
         display: none;
     }
@@ -199,7 +333,64 @@ header .user_gnb li:last-child {
         display: block;
     }
 
+    /* .quick_menu */
+    .quick_menu {
+        height: 60px;
+    }
 
+    .quick_menu ul li:first-child {
+        display: none;
+    }
+
+    .quick_menu ul li {
+        width: calc(100% / 3);
+        font-size: 16px;
+    }
+
+    .quick_menu ul li:nth-child(2) {
+        border-left: 1px solid #ccc;
+    }
+
+    .about {
+        height: 500px;
+        padding: 80px 0;
+    }
+
+    .about h3 {
+        font-size: 30px;
+        display: block;
+    }
+
+    .about .tab_menu {
+        font-size: 16px;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+    .about .tab_menu {
+        height: 22px;
+    }
+
+    .about .tab_cont {
+        margin-top: 80px;
+    }
+
+    .about .tab_cont p {
+        font-size: 30px;
+    }
+
+    .about .tab_cont a {
+        width: 200px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width:460px) {
+        .about .tab_cont p br {
+            display: none;
+        }
+    }
 }
 
 /* 1024px 이하 */
